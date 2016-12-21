@@ -26810,7 +26810,6 @@
 	      null,
 	      'About component'
 	    ),
-	    ',',
 	    React.createElement(
 	      'p',
 	      null,
