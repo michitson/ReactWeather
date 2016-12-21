@@ -26813,7 +26813,7 @@
 	    React.createElement(
 	      'p',
 	      null,
-	      'Welcome to the component page'
+	      'Welcome to the About page'
 	    )
 	  );
 	};
