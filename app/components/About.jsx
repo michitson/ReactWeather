@@ -3,10 +3,10 @@ var React = require('react');
 var About = (props) => {
     return(
       <div>
-        <h1>About component</h1>
-        <p>This is a weather application built on React</p>
+        <h1>About</h1>
+        <p>This is a weather application built with React</p>
         <p>
-          Here area a couple of the tools that were used:
+          Here are a couple of the tools that were used:
         </p>
         <ul>
           <li>
@@ -15,7 +15,9 @@ var About = (props) => {
           <li>
             <a href="http://www.openweathermap.org">Open Weathermap</a> API for obtaining weather data
           </li>
-          <li></li>
+          <li>
+            <a href='http://foundation.zurb.com'>Foundation</a> Tools used to layout and style the application
+          </li>
         </ul>
       </div>
     );
