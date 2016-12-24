@@ -26910,23 +26910,53 @@
 /* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 
 	var About = function About(props) {
 	  return React.createElement(
-	    'div',
+	    "div",
 	    null,
 	    React.createElement(
-	      'h2',
+	      "h1",
 	      null,
-	      'About component'
+	      "About component"
 	    ),
 	    React.createElement(
-	      'p',
+	      "p",
 	      null,
-	      'Welcome to the About page'
+	      "This is a weather application built on React"
+	    ),
+	    React.createElement(
+	      "p",
+	      null,
+	      "Here area a couple of the tools that were used:"
+	    ),
+	    React.createElement(
+	      "ul",
+	      null,
+	      React.createElement(
+	        "li",
+	        null,
+	        React.createElement(
+	          "a",
+	          { href: "https://facebook.github.io/React" },
+	          "React"
+	        ),
+	        " This was the javascript framework used"
+	      ),
+	      React.createElement(
+	        "li",
+	        null,
+	        React.createElement(
+	          "a",
+	          { href: "http://www.openweathermap.org" },
+	          "Open Weathermap"
+	        ),
+	        " API for obtaining weather data"
+	      ),
+	      React.createElement("li", null)
 	    )
 	  );
 	};
