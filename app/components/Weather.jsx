@@ -1,88 +1,81 @@
 var React = require('react');
 var WeatherForm = require('WeatherForm');
 var WeatherMessage = require('WeatherMessage');
-var openWeatherMap = require('openWeatherMap');
 var ErrorModal = require('ErrorModal');
+var openWeatherMap = require('openWeatherMap');
 
 var Weather = React.createClass({
-
-  getInitialState: function(){
+  getInitialState: function () {
     return {
-      isLoading: false,
-
+      isLoading: false
     }
   },
-
-  handleSearch: function(location) {
+  handleSearch: function (location) {
     var that = this;
+
     this.setState({
-      isLoading:true,
-      errorMessage:undefined
+      isLoading: true,
+      errorMessage: undefined,
+      location: undefined,
+      temp: undefined
     });
 
-    openWeatherMap.getTemp(location).then(function(temp){
+    openWeatherMap.getTemp(location).then(function (temp) {
       that.setState({
-        location:location,
+        location: location,
         temp: temp,
-        isLoading:false
+        isLoading: false
       });
-    },function(err){
+    }, function (e) {
       that.setState({
-        isLoading:false,
-        errorMessage:err.message,
-        location: undefined,
-        temp:undefined
+        isLoading: false,
+        errorMessage: e.message
       });
-      //alert(err);
     });
   },
-
-  componentDidMount: function(){
+  componentDidMount: function () {
     var location = this.props.location.query.location;
-    if(location && location.length> 0){
+
+    if (location && location.length > 0) {
       this.handleSearch(location);
-      window.location.hash='#/';
+      window.location.hash = '#/';
     }
-
   },
-
-  componentWillReceiveProps:function(newProps){
+  componentWillReceiveProps: function (newProps) {
     var location = newProps.location.query.location;
-    if(location && location.length> 0){
+
+    if (location && location.length > 0) {
       this.handleSearch(location);
-      window.location.hash='#/';
+      window.location.hash = '#/';
     }
-
   },
-
-  render: function(){
-
+  render: function () {
     var {isLoading, temp, location, errorMessage} = this.state;
 
-    function renderMessage(){
-      if(isLoading){
-        return <h3 className="text-center">Fetching Weather ...</h3>;
+    function renderMessage () {
+      if (isLoading) {
+        return <h3 className="text-center">Fetching weather...</h3>;
       } else if (temp && location) {
-        return <WeatherMessage location={location} temp={temp}/>;
+        return <WeatherMessage temp={temp} location={location}/>;
       }
     }
 
-    function renderError(){
-      if (typeof errorMessage ==='string'){
-        return(
+    function renderError () {
+      if (typeof errorMessage === 'string') {
+        return (
           <ErrorModal message={errorMessage}/>
         )
       }
     }
 
-    return(
+    return (
       <div>
-        <h1 className="text-center page - title">Get Weather</h1>
+        <h1 className="text-center page-title">Get Weather</h1>
         <WeatherForm onSearch={this.handleSearch}/>
         {renderMessage()}
         {renderError()}
       </div>
-    );
+    )
   }
 });
 
