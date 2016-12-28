@@ -25841,9 +25841,16 @@
 	var Nav = React.createClass({
 	  displayName: 'Nav',
 
+
 	  onSearch: function onSearch(e) {
 	    e.preventDefault();
-	    alert('not yet wired up');
+	    var location = this.refs.search.value;
+	    var encodedLocation = encodeURIComponent(location);
+
+	    if (location.length > 0) {
+	      this.refs.search.value = '';
+	      window.location.hash = '#/?location=' + encodedLocation;
+	    }
 	  },
 
 	  render: function render() {
@@ -25902,7 +25909,7 @@
 	            React.createElement(
 	              'li',
 	              null,
-	              React.createElement('input', { type: 'search', placeholder: 'Search Weather by City ...' })
+	              React.createElement('input', { type: 'search', ref: 'search', placeholder: 'Search Weather by City ...' })
 	            ),
 	            React.createElement(
 	              'li',
@@ -25957,10 +25964,28 @@
 	    }, function (err) {
 	      that.setState({
 	        isLoading: false,
-	        errorMessage: err.message
+	        errorMessage: err.message,
+	        location: undefined,
+	        temp: undefined
 	      });
 	      //alert(err);
 	    });
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    var location = this.props.location.query.location;
+	    if (location && location.length > 0) {
+	      this.handleSearch(location);
+	      window.location.hash = '#/';
+	    }
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	    var location = newProps.location.query.location;
+	    if (location && location.length > 0) {
+	      this.handleSearch(location);
+	      window.location.hash = '#/';
+	    }
 	  },
 
 	  render: function render() {
@@ -25994,7 +26019,7 @@
 	      null,
 	      React.createElement(
 	        'h1',
-	        { className: 'text-center page-title' },
+	        { className: 'text-center page - title' },
 	        'Get Weather'
 	      ),
 	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
@@ -27721,7 +27746,7 @@
 
 
 	// module
-	exports.push([module.id, ".page-title {\n  margin-top: 2.5rem;\n  margin-bottom: 2.5rem; }\n\ninput[type='search'] {\n  box-shadow: none; }\n", ""]);
+	exports.push([module.id, ".page-title {\n  color: #555;\n  margin-top: 2.5rem;\n  margin-bottom: 2.5rem; }\n\ninput[type='search'] {\n  box-shadow: none; }\n", ""]);
 
 	// exports
 
